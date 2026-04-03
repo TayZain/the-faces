@@ -501,6 +501,7 @@ function SceneController({ media }: { media: MediaItem[] }) {
 
 export function InfiniteCanvasScene({
   media,
+  paused = false,
   showFps = false,
   showControls = false,
   cameraFov = 60,
@@ -520,9 +521,15 @@ export function InfiniteCanvasScene({
       <div className={styles.container}>
         <Canvas
           camera={{ position: [0, 0, INITIAL_CAMERA_Z], fov: cameraFov, near: cameraNear, far: cameraFar }}
+          frameloop={paused ? "demand" : "always"}
           dpr={dpr}
           flat
-          gl={{ antialias: false, powerPreference: "high-performance" }}
+          gl={{
+            antialias: false,
+            powerPreference: "high-performance",
+            // Allows browser to sync with high-refresh displays (120Hz, 144Hz)
+            desynchronized: true,
+          }}
           className={styles.canvas}
         >
           <color attach="background" args={[backgroundColor]} />

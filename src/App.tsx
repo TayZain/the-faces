@@ -5,43 +5,36 @@ import type { MediaItem } from './infinite-canvas/types'
 import { manifest } from './manifest'
 import styles from './App.module.css'
 
-type Theme = 'light' | 'dark'
-
-function useTheme(): [Theme, () => void] {
-  const [theme, setTheme] = React.useState<Theme>('light')
-
-  React.useEffect(() => {
-    document.documentElement.dataset.theme = theme
-  }, [theme])
-
-  const toggle = React.useCallback(() => {
-    setTheme((t) => (t === 'light' ? 'dark' : 'light'))
-  }, [])
-
-  return [theme, toggle]
-}
-
 function App() {
-  const [theme, toggleTheme] = useTheme()
   const [media] = React.useState<MediaItem[]>(manifest)
   const [loaderDone, setLoaderDone] = React.useState(false)
-
-  const bgColor = theme === 'dark' ? '#0a0a0a' : '#ffffff'
-  const label = theme === 'dark' ? 'Light' : 'Dark'
+  const [canvasActive, setCanvasActive] = React.useState(false)
+  const navTitleRef = React.useRef<HTMLHeadingElement>(null)
 
   return (
     <>
-      {/* Loader manages its own progress via useProgress internally */}
-      <PageLoader onDone={() => setLoaderDone(true)} />
+      <InfiniteCanvas
+        media={media}
+        backgroundColor="#0a0a0a"
+        paused={!canvasActive}
+      />
 
-      <InfiniteCanvas media={media} backgroundColor={bgColor} />
+      <h1
+        ref={navTitleRef}
+        className={styles.navTitle}
+        style={{ opacity: loaderDone ? 1 : 0 }}
+        aria-label="The Faces"
+      >
+        THE FACES
+      </h1>
 
-      {/* Header toggle — permanent, top-right */}
-      <header className={styles.header}>
-        <button className={styles.themeBtn} onClick={toggleTheme} aria-label="Toggle theme">
-          {label}
-        </button>
-      </header>
+      {!loaderDone && (
+        <PageLoader
+          navTitleRef={navTitleRef}
+          onReveal={() => setCanvasActive(true)}  
+          onDone={() => setLoaderDone(true)}     
+        />
+      )}
     </>
   )
 }

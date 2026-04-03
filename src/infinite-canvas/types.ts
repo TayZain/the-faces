@@ -8,6 +8,7 @@ export type MediaItem = {
 
 export type InfiniteCanvasProps = {
   media: MediaItem[];
+  paused?: boolean;
   showFps?: boolean;
   showControls?: boolean;
   cameraFov?: number;
