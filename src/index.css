@@ -1,0 +1,42 @@
+:root {
+  font-size: 12px;
+  font-family: 'Inter', ui-monospace, monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --bg: #ffffff;
+  --fg: #000000;
+  --fg-muted: rgba(0, 0, 0, 0.4);
+  --btn-bg: rgba(0, 0, 0, 0.06);
+  --btn-bg-hover: rgba(0, 0, 0, 0.12);
+  --btn-border: rgba(0, 0, 0, 0.12);
+  --page-padding: 1.5rem;
+}
+
+[data-theme="dark"] {
+  --bg: #0a0a0a;
+  --fg: #f0f0f0;
+  --fg-muted: rgba(240, 240, 240, 0.4);
+  --btn-bg: rgba(255, 255, 255, 0.08);
+  --btn-bg-hover: rgba(255, 255, 255, 0.14);
+  --btn-border: rgba(255, 255, 255, 0.12);
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  color: var(--fg);
+  background-color: var(--bg);
+  transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out;
+}
+
+#root {
+  position: relative;
+  min-height: 100svh;
+}

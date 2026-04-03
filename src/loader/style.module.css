@@ -1,0 +1,59 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg);
+  /* GPU layer — avoids repaints during slide-up */
+  will-change: transform;
+  transition: background-color 0.4s ease-in-out;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  will-change: opacity;
+}
+
+.tube {
+  position: relative;
+  width: 100%;
+  height: 24vw;
+}
+
+.line {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  line-height: 1;
+  font-family: 'Inter', sans-serif;
+  font-size: 18vw;
+  font-weight: 700;
+  letter-spacing: -0.6vw;
+  white-space: nowrap;
+  text-align: center;
+  color: var(--fg);
+  user-select: none;
+}
+
+/* Characters split by GSAP SplitText */
+.char {
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+.counter {
+  margin-top: 6vw;
+  font-family: 'Inter', ui-monospace, monospace;
+  font-size: clamp(0.75rem, 1.4vw, 1rem);
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  color: var(--fg-muted);
+  user-select: none;
+}
