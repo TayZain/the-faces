@@ -524,12 +524,7 @@ export function InfiniteCanvasScene({
           frameloop={paused ? "demand" : "always"}
           dpr={dpr}
           flat
-          gl={{
-            antialias: false,
-            powerPreference: "high-performance",
-            // Allows browser to sync with high-refresh displays (120Hz, 144Hz)
-            desynchronized: true,
-          }}
+          gl={{ antialias: false, powerPreference: "high-performance" }}
           className={styles.canvas}
         >
           <color attach="background" args={[backgroundColor]} />
